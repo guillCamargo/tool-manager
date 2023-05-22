@@ -2,8 +2,13 @@ import { Router } from "express";
 import { toolsController } from "./core/services/tools";
 import { usersController } from "./core/services/users"
 import { verifyJWT } from "./core/utils/VerifyJWT";
+import swaggerUi from "swagger-ui-express"
+import swaggerDocs from "./swagger.json"
 
 const router = Router()
+
+router.use('/api-docs', swaggerUi.serve);
+router.get('/api-docs', swaggerUi.setup(swaggerDocs));
 
 router.get('/tools', verifyJWT, (req, res) => {
     return toolsController.findAll(res)

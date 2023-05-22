@@ -1,0 +1,240 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tool Manager",
+        "description": "API com objetivo de gerenciar ferramentas.",
+        "contact": {
+            "email": "guill.durao@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "API de desenvolvimento."
+        }
+    ],
+    "paths": {
+        "/tools": {
+            "post": {
+                "summary": "Cadastro de ferramenta",
+                "description": "Rota responsável por cadastrar nova ferramenta.",
+                "tags": [
+                    "Tools"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": {}
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tool"
+                            },
+                            "examples": {
+                                "tool": {
+                                    "value": {
+                                        "title": "hotel",
+                                        "link": "https://github.com/typicode/hotel",
+                                        "description": "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of th",
+                                        "tags": [
+                                            "node",
+                                            "organizing",
+                                            "webapps",
+                                            "domain",
+                                            "developer",
+                                            "https",
+                                            "proxy"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Erro na validação da ferramenta."
+                    },
+                    "401": {
+                        "description": "Sem autorização"
+                    },
+                    "500": {
+                        "description": "Erro inesperado no servidor."
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Tool"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Lista de ferramentas",
+                "description": "Rota responsável por cadastrar listar todas as ferramentas.",
+                "tags": [
+                    "Tools"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": {}
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Sem autorização"
+                    },
+                    "500": {
+                        "description": "Erro inesperado no servidor."
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tools": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Tool"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tools/:id": {
+            "delete": {
+                "summary": "Exclusão de ferramenta",
+                "description": "Rota responsável por excluir uma ferramenta informando o id.",
+                "tags": [
+                    "Tools"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id da ferramenta a ser excluída.",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Não foi possível excluir ferramenta."
+                    },
+                    "401": {
+                        "description": "Sem autorização"
+                    },
+                    "500": {
+                        "description": "Erro inesperado no servidor."
+                    },
+                    "204": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/tools/searching": {
+            "get": {
+                "summary": "Pesquisa de Ferramentas",
+                "description": "Rota responsável por pesquisar ferramentas usando um único parâmetro para pesquisar por todas as propriesdades.",
+                "tags": [
+                    "Tools"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": {}
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "valor",
+                        "description": "Palavra-chave para utilizar na pesquisa",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Sem autorização"
+                    },
+                    "500": {
+                        "description": "Erro inesperado no servidor."
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tools": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Tool"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tool": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "link": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
