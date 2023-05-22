@@ -5,7 +5,7 @@ import { verifyJWT } from "./core/utils/VerifyJWT";
 
 const router = Router()
 
-router.get('/tools', verifyJWT, (req, res, next) => {
+router.get('/tools', verifyJWT, (req, res) => {
     return toolsController.findAll(res)
 })
 
