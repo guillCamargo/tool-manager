@@ -1,5 +1,5 @@
-import Tool from "../../../core/entities/Tool"
-import { IToolDTO } from "../../../core/services/tools/dtos/ToolDTO"
+import Tool from "@entities/Tool"
+import { IToolDTO } from "@services/tools/dtos/ToolDTO"
 
 export interface IToolsRepository {
     findAll(): Promise<Tool[]>

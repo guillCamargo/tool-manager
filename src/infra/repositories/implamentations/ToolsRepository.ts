@@ -1,7 +1,7 @@
-import Tool from "../../../core/entities/Tool";
-import { IToolsRepository } from "../interfaces/IToolsRepository";
-import { IToolDTO } from "../../../core/services/tools/dtos/ToolDTO";
-import ErrorMessage from "../../../core/utils/ErrorMessage";
+import Tool from "@entities/Tool";
+import { IToolsRepository } from "@repositories/interfaces/IToolsRepository";
+import { IToolDTO } from "@services/tools/dtos/ToolDTO";
+import ErrorMessage from "@utils/ErrorMessage";
 import { Op, Sequelize } from "sequelize";
 
 export class ToolsRepository implements IToolsRepository {

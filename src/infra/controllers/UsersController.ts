@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IUsersService } from "../../core/services/users/IUsersService";
+import { IUsersService } from "@services/users/IUsersService";
 
 export class UsersController {
     constructor(

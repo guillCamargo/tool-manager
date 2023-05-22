@@ -7,11 +7,21 @@
     "strict": false,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@entities/*": ["./src/core/entities/*"],
+      "@services/*": ["./src/core/services/*"],
+      "@utils/*": ["./src/core/utils/*"],
+      "@controllers/*": ["./src/infra/controllers/*"],
+      "@database/*": ["./src/infra/database/*"],
+      "@repositories/*": ["./src/infra/repositories/*"],
+  },
   },
   "include": [
     "src/**/*.ts",
     "test/core/**/*.ts",
+    "jest.config.ts"
   ],
   "exclude": [
     "sequelize.config.js",

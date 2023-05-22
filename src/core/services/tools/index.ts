@@ -1,7 +1,7 @@
-import { ToolsController } from "../../../infra/controllers/ToolsController"
-import { ToolsRepository } from "../../../infra/repositories/implamentations/ToolsRepository"
-import Tool from "../../entities/Tool"
+import { ToolsController } from "@controllers/ToolsController"
+import { ToolsRepository } from "@repositories/implamentations/ToolsRepository"
 import { ToolsService } from "./ToolsService"
+
 
 const toolsRepository = new ToolsRepository
 

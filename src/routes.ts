@@ -1,7 +1,7 @@
+import { toolsController } from "@services/tools";
+import { usersController } from "@services/users";
+import { verifyJWT } from "@utils/VerifyJWT";
 import { Router } from "express";
-import { toolsController } from "./core/services/tools";
-import { usersController } from "./core/services/users"
-import { verifyJWT } from "./core/utils/VerifyJWT";
 import swaggerUi from "swagger-ui-express"
 import swaggerDocs from "./swagger.json"
 

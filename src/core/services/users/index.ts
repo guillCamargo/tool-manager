@@ -1,5 +1,5 @@
-import { UsersController } from "../../../infra/controllers/UsersController";
-import { UsersRepository } from "../../../infra/repositories/implamentations/UsersRepository";
+import { UsersController } from "@controllers/UsersController";
+import { UsersRepository } from "@repositories/implamentations/UsersRepository";
 import { UsersService } from "./UsersService";
 
 const usersRepository = new UsersRepository

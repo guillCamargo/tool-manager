@@ -1,4 +1,4 @@
-import Tool from "../../entities/Tool"
+import Tool from "@entities/Tool"
 import { IToolDTO } from "./dtos/ToolDTO"
 import { IToolListDTO } from "./dtos/ToolListDTO"
 

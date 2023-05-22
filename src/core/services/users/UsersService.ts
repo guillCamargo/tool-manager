@@ -1,8 +1,8 @@
-import ErrorMessage from "../../utils/ErrorMessage";
+import ErrorMessage from "@utils/ErrorMessage";
 import { UserCredentialsDTO } from "./dtos/UserCredentialsDTO";
 import { IUsersService } from "./IUsersService";
 import jwt from "jsonwebtoken"
-import { IUsersRepository } from "../../../infra/repositories/interfaces/IUSersRepository";
+import { IUsersRepository } from "@repositories/interfaces/IUSersRepository";
 
 export class UsersService implements IUsersService {
     constructor(
@@ -11,7 +11,7 @@ export class UsersService implements IUsersService {
 
     async login(userCredentials: UserCredentialsDTO): Promise<string> {
         try {
-            const user = await this.usersRepository.findByUsername(
+            const user = await this.usersRepository.findByUsernameAndPassword(
                 userCredentials.username,
                 userCredentials.password)
             const token = jwt.sign({ user: user.username }, process.env.SECRET, {

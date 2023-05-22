@@ -1,6 +1,5 @@
-import { IToolsRepository } from "../../../infra/repositories/interfaces/IToolsRepository";
-import Tool from "../../entities/Tool";
-import ErrorMessage from "../../utils/ErrorMessage";
+import { IToolsRepository } from "@repositories/interfaces/IToolsRepository";
+import ErrorMessage from "@utils/ErrorMessage";
 import { IToolDTO } from "./dtos/ToolDTO";
 import { IToolListDTO } from "./dtos/ToolListDTO";
 import { IToolsService } from "./IToolsService";
