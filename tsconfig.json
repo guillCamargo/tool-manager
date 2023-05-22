@@ -1,4 +1,9 @@
 {
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
@@ -10,13 +15,28 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@entities/*": ["./src/core/entities/*"],
-      "@services/*": ["./src/core/services/*"],
-      "@utils/*": ["./src/core/utils/*"],
-      "@controllers/*": ["./src/infra/controllers/*"],
-      "@database/*": ["./src/infra/database/*"],
-      "@repositories/*": ["./src/infra/repositories/*"],
-  },
+      "@entities/*": [
+        "./src/core/entities/*"
+      ],
+      "@services/*": [
+        "./src/core/services/*"
+      ],
+      "@utils/*": [
+        "./src/core/utils/*"
+      ],
+      "@repositories-interfaces/*": [
+        "./src/core/repositories/interfaces*"
+      ],
+      "@controllers/*": [
+        "./src/infra/controllers/*"
+      ],
+      "@database/*": [
+        "./src/infra/database/*"
+      ],
+      "@repositories/*": [
+        "./src/infra/repositories/*"
+      ],
+    },
   },
   "include": [
     "src/**/*.ts",

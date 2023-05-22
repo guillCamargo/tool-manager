@@ -1,5 +1,5 @@
 import Tool from "@entities/Tool";
-import { IToolsRepository } from "@repositories/interfaces/IToolsRepository";
+import { IToolsRepository } from "src/core/repositories/interfaces/IToolsRepository";
 import { IToolDTO } from "@services/tools/dtos/ToolDTO";
 import ErrorMessage from "@utils/ErrorMessage";
 import { Op, Sequelize } from "sequelize";

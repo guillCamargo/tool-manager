@@ -1,8 +1,8 @@
 import ErrorMessage from "@utils/ErrorMessage";
-import { UserCredentialsDTO } from "./dtos/UserCredentialsDTO";
 import { IUsersService } from "./IUsersService";
 import jwt from "jsonwebtoken"
-import { IUsersRepository } from "@repositories/interfaces/IUSersRepository";
+import { IUsersRepository } from "@repositories-interfaces//IUSersRepository";
+import { UserCredentialsDTO } from "./dtos/UserCredentialsDTO";
 
 export class UsersService implements IUsersService {
     constructor(

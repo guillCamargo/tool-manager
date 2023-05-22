@@ -1,4 +1,4 @@
-import { IToolsRepository } from "@repositories/interfaces/IToolsRepository";
+import { IToolsRepository } from "@repositories-interfaces//IToolsRepository";
 import ErrorMessage from "@utils/ErrorMessage";
 import { IToolDTO } from "./dtos/ToolDTO";
 import { IToolListDTO } from "./dtos/ToolListDTO";

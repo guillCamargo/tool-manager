@@ -14,7 +14,6 @@ export const verifyJWT = (req: Request, res: Response, next: () => void) => {
         process.env.SECRET,
         (error, decoded) => {
             if (error) {
-                console.log(error)
                 return res.status(401).json({ auth: false, message: 'Failed to authenticate token.' });
             }
 
