@@ -17,7 +17,6 @@ export class ToolsService implements IToolsService {
             const tool = await this.toolsRepository.create(data)
             return tool
         } catch (e) {
-            console.log(e)
             if (e.code)
                 throw e
             else

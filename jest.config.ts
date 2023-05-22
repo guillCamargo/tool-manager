@@ -20,4 +20,7 @@ export default {
     "json",
     "node"
   ],
+  setupFiles: [
+    "dotenv/config"
+  ]
 };
