@@ -1,58 +1,28 @@
 import { Request, Response } from "express";
-import { IToolDTO } from "../../core/services/tools/dtos/ToolDTO";
-import { IToolListDTO } from "../../core/services/tools/dtos/ToolListDTO";
-import { ToolsService } from "../../core/services/tools/ToolsService";
-import ErrorMessage from "../../core/utils/ErrorMessage";
+import { IToolsService } from "../../core/services/tools/IToolsService";
 
 export class ToolsController {
     constructor(
-        private toolsService: ToolsService
+        private toolsService: IToolsService
     ) { }
 
     async create(req: Request, res: Response): Promise<Response> {
-        const toolDTO: IToolDTO = req.body
-
         try {
-            await this.validateTool(toolDTO, res)
+            const toolDTO = await this.toolsService.create(req.body)
 
-            const tool = await this.toolsService.create(toolDTO)
-
-            return res.status(201).send(tool);
+            return res.status(201).send(toolDTO);
         } catch (e) {
-            (e instanceof ErrorMessage ?
-                res.status(e.code).send(e) :
-                res.status(500).send(new ErrorMessage(500, 'Erro inesperado no servidor.')))
-        }
-
-    }
-
-    async validateTool(data: IToolDTO, res: Response) {
-        const tool = await this.titleExists(data.title)
-
-        if (tool) {
-            throw new ErrorMessage(400, 'Título informada já existe na nossa base de dados.')
-        }
-        if (data.description.length > 256) {
-            throw new ErrorMessage(400, 'Descrição acima do tamanho permitido: 256 caracteres.')
-        }
-        if (data.tags.length > 8) {
-            throw new ErrorMessage(400, 'Quantidade de tags acima do máximo: 8 tags.')
+            return res.status(e.code).send(e)
         }
     }
-
-    async titleExists(title: string) {
-        return this.toolsService.findByTitle(title)
-    }
-
 
     async findAll(res: Response): Promise<Response> {
-        let toolsDTO: IToolListDTO = { tools: [] };
         try {
-            toolsDTO.tools = await this.toolsService.findAll()
+            const toolListDTO =  await this.toolsService.findAll()
 
-            return res.status(200).send(toolsDTO)
+            return res.status(200).send(toolListDTO)
         } catch (e) {
-            return res.status(500).send(new ErrorMessage(500, 'Erro interno no Servidor.'))
+            return res.status(e.code).send(e)
         }
     }
 
@@ -71,17 +41,13 @@ export class ToolsController {
 
     async search(req: Request, res: Response): Promise<Response> {
         const valor = req.query.valor.toString()
-        let toolsDTO: IToolListDTO = { tools: [] };
 
         try {
-            console.log(valor)
-            toolsDTO.tools = await this.toolsService.search(valor)
+            const toolListDTO = await this.toolsService.search(valor)
 
-            return res.status(201).send(toolsDTO);
+            return res.status(201).send(toolListDTO);
         } catch (e) {
-            (e instanceof ErrorMessage ?
-                res.status(e.code).send(e) :
-                res.status(500).send(new ErrorMessage(500, 'Erro inesperado no servidor.')))
+            return res.status(e.code).send(e)
         }
     }
 }

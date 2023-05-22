@@ -36,7 +36,7 @@ describe('ToolsService', () => {
         )
     })
 
-    /* it('If it can persist a tool twice', async () => {
+    it('If it can persist a tool twice', async () => {
         jest.spyOn(Tool, 'create').mockResolvedValue({ id: 1, ...toolMock })
         jest.spyOn(Tool, 'findOne').mockResolvedValueOnce(null)
         jest.spyOn(Tool, 'findOne').mockResolvedValueOnce(Tool.build(toolMock))
@@ -49,7 +49,7 @@ describe('ToolsService', () => {
             })
         )
 
-        await expect(toolsService.create(toolMock)).rejects.toHaveProperty('message', 'Título informada já existe na nossa base de dados.')
+        await expect(toolsService.create(toolMock)).rejects.toHaveProperty('message', 'Título informado já existe na nossa base de dados.')
     })
 
     it('If it validates a tool with description bigger then 256 length', async () => {
@@ -83,5 +83,5 @@ describe('ToolsService', () => {
         expect(deviantToolDTO.tags).toHaveLength(9)
 
         await expect(toolsService.validateTool(deviantToolDTO)).rejects.toHaveProperty('message', 'Quantidade de tags acima do máximo: 8 tags.')
-    }) */
+    }) 
 })

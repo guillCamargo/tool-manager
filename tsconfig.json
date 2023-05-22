@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -10,6 +9,6 @@
   },
   "include": [
     "src/**/*.ts",
-    "test/core/**/*.ts",
+    "test/core/**/*.ts", "src/infra/database/config.js",
   ]
 }

@@ -6,17 +6,29 @@ import { Op, Sequelize } from "sequelize";
 
 export class ToolsRepository implements IToolsRepository {
     async findAll(): Promise<Tool[]> {
-        return Tool.findAll()
+        try {
+            return Tool.findAll()
+        } catch (e) {
+            throw new ErrorMessage(500, 'Erro inesperado no servidor.')
+        }
     }
     async findByTitle(title: string): Promise<Tool> {
-        return Tool.findOne({
-            where: Sequelize.where(
-                Sequelize.fn('upper', Sequelize.col('title')),
-                title.toUpperCase())
-        })
+        try {
+            return Tool.findOne({
+                where: Sequelize.where(
+                    Sequelize.fn('upper', Sequelize.col('title')),
+                    title.toUpperCase())
+            })
+        } catch (e) {
+            throw new ErrorMessage(500, 'Erro inesperado no servidor.')
+        }
     }
     async create(toolDTO: IToolDTO): Promise<Tool> {
-        return Tool.create(toolDTO)
+        try {
+            return Tool.create(toolDTO)
+        } catch (e) {
+            throw new ErrorMessage(500, 'Erro inesperado no servidor.')
+        }
     }
     async delete(id: number): Promise<any> {
 
@@ -32,15 +44,19 @@ export class ToolsRepository implements IToolsRepository {
         });
     }
     async search(valor: string): Promise<Tool[]> {
-        return Tool.findAll({
-            where: {
-                [Op.or]: [
-                    { title: { [Op.like]: '%' + valor + '%' } },
-                    { link: { [Op.like]: '%' + valor + '%' } },
-                    { description: { [Op.like]: '%' + valor + '%' } },
-                    Sequelize.fn('JSON_CONTAINS', Sequelize.col('tool.tags'), '"' + valor + '"')
-                ],
-            }
-        })
+        try {
+            return Tool.findAll({
+                where: {
+                    [Op.or]: [
+                        { title: { [Op.like]: '%' + valor + '%' } },
+                        { link: { [Op.like]: '%' + valor + '%' } },
+                        { description: { [Op.like]: '%' + valor + '%' } },
+                        Sequelize.fn('JSON_CONTAINS', Sequelize.col('tags'), '"' + valor + '"')
+                    ],
+                }
+            })
+        } catch (e) {
+            throw new ErrorMessage(500, 'Erro inesperado no servidor.')
+        }
     }
 }

@@ -1,39 +1,29 @@
 import Sequelize, { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
 import { connection } from '../../infra/database';
 
-class Tool extends Model<InferAttributes<Tool>, InferCreationAttributes<Tool>> {
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: CreationOptional<number>
-    declare title: string;
-    declare link: string;
-    declare description: string;
-    declare tags: string[];
+    declare username: string;
+    declare password: string;
 }
 
-Tool.init({
+User.init({
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    title: {
+    username: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    link: {
+    password: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    description: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    tags: {
-        type: Sequelize.JSON,
-        allowNull: false,
-    }
 }, {
     sequelize: connection,
-    modelName: 'tools'
+    tableName: 'users'
 })
 
-export default Tool
+export default User

@@ -1,13 +1,16 @@
 import { Sequelize } from "sequelize"
+import config from '../database/config.js'
+
+const envConfig = config[process.env.NODE_ENV]
 
 export const connection = new Sequelize(
-    process.env.MYSQLDB_DATABASE,
-    process.env.MYSQLDB_USER,
-    process.env.MYSQLDB_ROOT_PASSWORD,
+    envConfig.database,
+    envConfig.username,
+    envConfig.password,
     {
-        dialect: 'mysql',
-        host: process.env.MYSQLDB_DOCKER_HOST,
-        port: +process.env.MYSQLDB_DOCKER_PORT,
+        dialect: envConfig.dialect,
+        host: envConfig.host,
+        port: envConfig.port,
         define: {
             timestamps: true,
             underscored: true,
