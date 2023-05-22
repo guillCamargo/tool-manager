@@ -19,7 +19,6 @@ export class UsersService implements IUsersService {
             })
             return token
         } catch (e) {
-            console.log(e)
             throw new ErrorMessage(401, 'Credenciais inválidas')
         }
     }

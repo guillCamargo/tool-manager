@@ -2,7 +2,6 @@ import { expect, describe, it } from '@jest/globals';
 import { ToolsRepository } from '../../../../src/infra/repositories/implamentations/ToolsRepository'
 import { ToolsService } from '../../../../src/core/services/tools/ToolsService'
 import Tool from '../../../../src/core/entities/Tool';
-import ErrorMessage from '../../../../src/core/utils/ErrorMessage';
 
 describe('ToolsService', () => {
 
@@ -36,6 +35,14 @@ describe('ToolsService', () => {
         )
     })
 
+    it('If it throws an error trying to persist a tool', async () => {
+        jest.spyOn(Tool, 'create').mockRejectedValue(new Error('Erro interno.'))
+        jest.spyOn(Tool, 'findOne').mockResolvedValueOnce(null)
+
+        await expect(toolsService.create(toolMock))
+            .rejects.toHaveProperty('message', 'Erro inesperado no servidor.')
+    })
+
     it('If it can persist a tool twice', async () => {
         jest.spyOn(Tool, 'create').mockResolvedValue({ id: 1, ...toolMock })
         jest.spyOn(Tool, 'findOne').mockResolvedValueOnce(null)
@@ -61,7 +68,8 @@ describe('ToolsService', () => {
             + 'Suspendisse eleifend et risus in bibendum. Pellentesque luctus rutrum enim sed tincidunt.'
             + 'Pellentesque sed ex sed tortor semper tincidunt. Fusce ac sapien urna. Sed nec feugiat lorem, quis pulvinar nunc.'
 
-        await expect(toolsService.validateTool(deviantToolDTO)).rejects.toHaveProperty('message', 'Descrição acima do tamanho permitido: 256 caracteres.')
+        await expect(toolsService.validateTool(deviantToolDTO))
+            .rejects.toHaveProperty('message', 'Descrição acima do tamanho permitido: 256 caracteres.')
     })
 
     it('If it validates a tool with above 8 tags', async () => {
@@ -82,6 +90,53 @@ describe('ToolsService', () => {
 
         expect(deviantToolDTO.tags).toHaveLength(9)
 
-        await expect(toolsService.validateTool(deviantToolDTO)).rejects.toHaveProperty('message', 'Quantidade de tags acima do máximo: 8 tags.')
-    }) 
+        await expect(toolsService.validateTool(deviantToolDTO))
+            .rejects.toHaveProperty('message', 'Quantidade de tags acima do máximo: 8 tags.')
+    })
+
+    it('If it can delete a tool by id', async () => {
+        jest.spyOn(Tool, 'destroy').mockResolvedValueOnce(1)
+
+        const rowDeleted = await toolsService.delete(1)
+
+
+        expect(Tool.destroy).toBeCalledTimes(1)
+    })
+
+    it('If it throws an error trying to delete a tool by id', async () => {
+        jest.spyOn(Tool, 'destroy').mockRejectedValueOnce(new Error('Erro inesperado no servidor.'))
+
+        await expect(toolsService.delete(1))
+            .rejects.toHaveProperty('message', 'Erro inesperado no servidor.')
+    })
+
+    it('If it can get all tools', async () => {
+        jest.spyOn(Tool, 'findAll').mockResolvedValueOnce([])
+
+        const tools = await toolsService.findAll()
+
+        expect(tools).toBeTruthy()
+    })
+
+    it('If it throws an error trying to get all tools', async () => {
+        jest.spyOn(Tool, 'findAll').mockRejectedValue(new Error('Erro interno.'))
+
+        await expect(toolsService.findAll())
+            .rejects.toHaveProperty('message', 'Erro inesperado no servidor.')
+    })
+
+    it('If it can search for tools', async () => {
+        jest.spyOn(Tool, 'findAll').mockResolvedValueOnce([])
+
+        const tools = await toolsService.search("valor")
+
+        expect(tools).toBeTruthy()
+    })
+
+    it('If it throws an error trying to search for tools', async () => {
+        jest.spyOn(Tool, 'findAll').mockRejectedValue(new Error('Erro interno.'))
+
+        await expect(toolsService.search("valor"))
+            .rejects.toHaveProperty('message', 'Erro inesperado no servidor.')
+    })
 })
