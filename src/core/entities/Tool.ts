@@ -1,5 +1,5 @@
 import Sequelize, { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import { connection } from '../../infra/database';
+import { connection } from '@database/Connection';
 
 class Tool extends Model<InferAttributes<Tool>, InferCreationAttributes<Tool>> {
     declare id: CreationOptional<number>

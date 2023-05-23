@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IToolsService } from "../../core/services/tools/IToolsService";
+import { IToolsService } from "@services/tools/IToolsService";
 
 export class ToolsController {
     constructor(

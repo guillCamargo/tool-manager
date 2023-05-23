@@ -1,7 +1,9 @@
 import { expect, describe, it } from '@jest/globals';
-import { UsersRepository } from '../../../../src/infra/repositories/implamentations/UsersRepository'
+import { UsersRepository } from '../../../../src/infra/repositories/implementations/UsersRepository'
 import { UsersService } from '../../../../src/core/services/users/UsersService'
 import User from '../../../../src/core/entities/User';
+import { IUsersRepository } from '@repositories/interfaces/IUSersRepository';
+import { IUsersService } from '@services/users/IUsersService';
 
 describe('UsersService', () => {
 
@@ -10,8 +12,13 @@ describe('UsersService', () => {
         password: '54321',
     }
 
-    const usersRepository = new UsersRepository()
-    const usersService = new UsersService(usersRepository)
+    let usersRepository: IUsersRepository
+    let usersService: IUsersService
+
+    beforeEach(() => {
+        usersRepository = new UsersRepository()
+        usersService = new UsersService(usersRepository)
+    })
 
     it('If it can find an User e generate a token', async () => {
         const user = User.build(userMock)

@@ -1,6 +1,5 @@
-import { IToolsRepository } from "../../../infra/repositories/interfaces/IToolsRepository";
-import Tool from "../../entities/Tool";
-import ErrorMessage from "../../utils/ErrorMessage";
+import { IToolsRepository } from "@repositories/interfaces/IToolsRepository";
+import ErrorMessage from "@utils/ErrorMessage";
 import { IToolDTO } from "./dtos/ToolDTO";
 import { IToolListDTO } from "./dtos/ToolListDTO";
 import { IToolsService } from "./IToolsService";
@@ -38,10 +37,9 @@ export class ToolsService implements IToolsService {
         }
     }
 
-
     async findByTitle(title: string) {
         try {
-            const tool = this.toolsRepository.findByTitle(title)
+            const tool = await this.toolsRepository.findByTitle(title)
             return tool
         } catch (e) {
             throw new ErrorMessage(500, 'Erro inesperado no servidor.')
@@ -60,7 +58,7 @@ export class ToolsService implements IToolsService {
 
     async delete(id: number) {
         try {
-            return this.toolsRepository.delete(id)
+            return await this.toolsRepository.delete(id)
         } catch (e) {
             if (e.code)
                 throw e

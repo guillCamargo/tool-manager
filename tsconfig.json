@@ -1,4 +1,9 @@
 {
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
@@ -7,11 +12,36 @@
     "strict": false,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@entities/*": [
+        "./src/core/entities/*"
+      ],
+      "@services/*": [
+        "./src/core/services/*"
+      ],
+      "@utils/*": [
+        "./src/core/utils/*"
+      ],
+      "@repositories/interfaces/*": [
+        "./src/core/repositories/interfaces/*"
+      ],
+      "@controllers/*": [
+        "./src/infra/controllers/*"
+      ],
+      "@database/*": [
+        "./src/infra/database/*"
+      ],
+      "@repositories/implementations/*": [
+        "src/infra/repositories/implementations/*"
+      ],
+    },
   },
   "include": [
     "src/**/*.ts",
-    "test/core/**/*.ts",
+    "tests/**/*.ts",
+    "jest.config.ts"
   ],
   "exclude": [
     "sequelize.config.js",

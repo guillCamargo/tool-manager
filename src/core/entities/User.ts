@@ -1,5 +1,6 @@
+import { connection } from '@database/Connection';
 import Sequelize, { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
-import { connection } from '../../infra/database';
+
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: CreationOptional<number>

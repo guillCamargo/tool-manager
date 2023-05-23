@@ -1,3 +1,6 @@
+import { pathsToModuleNameMapper } from 'ts-jest';
+import { compilerOptions } from './tsconfig.json';
+
 export default {
   clearMocks: true,
   collectCoverage: true,
@@ -13,6 +16,18 @@ export default {
     "/dist/",
     "/coverage",
     "/node_modules/"
+  ],
+  moduleNameMapper: {
+    "@entities/(.*)": ["<rootDir>/src/core/entities/$1"],
+    "@services/(.*)": ["<rootDir>/src/core/services/$1"],
+    "@utils/(.*)": ["<rootDir>/src/core/utils/$1"],
+    "@repositories/interfaces/(.*)": ["<rootDir>/src/core/repositories/interfaces*"],
+    "@controllers/(.*)": ["<rootDir>/src/infra/controllers/$1"],
+    "@database/(.*)": ["<rootDir>/src/infra/database/$1"],
+    "@repositories/implementations/(.*)": ["<rootDir>/src/infra/repositories/implementations/$1"],
+  },
+  modulePaths: [
+      '<rootDir>'
   ],
   moduleFileExtensions: [
     "ts",
