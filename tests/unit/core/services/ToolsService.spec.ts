@@ -3,7 +3,7 @@ import { ToolsService } from '@services/tools/ToolsService'
 import Tool from '@entities/Tool';
 import { IToolsService } from '@services/tools/IToolsService';
 import { IToolsRepository } from '@repositories/interfaces/IToolsRepository';
-import { ToolsRepository } from '@repositories/implementations/ToolsRepository';
+import { MySQLToolsRepository } from '@repositories/implementations/MySQLToolsRepository';
 
 describe('ToolsService', () => {
 
@@ -25,7 +25,7 @@ describe('ToolsService', () => {
     let toolsService: IToolsService
 
     beforeEach(() => {
-        toolsRepository = new ToolsRepository()
+        toolsRepository = new MySQLToolsRepository()
         toolsService = new ToolsService(toolsRepository)
     })
 
