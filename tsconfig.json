@@ -24,8 +24,8 @@
       "@utils/*": [
         "./src/core/utils/*"
       ],
-      "@repositories-interfaces/*": [
-        "./src/core/repositories/interfaces*"
+      "@repositories/interfaces/*": [
+        "./src/core/repositories/interfaces/*"
       ],
       "@controllers/*": [
         "./src/infra/controllers/*"
@@ -33,14 +33,14 @@
       "@database/*": [
         "./src/infra/database/*"
       ],
-      "@repositories/*": [
-        "./src/infra/repositories/*"
+      "@repositories/implementations/*": [
+        "src/infra/repositories/implementations/*"
       ],
     },
   },
   "include": [
     "src/**/*.ts",
-    "test/core/**/*.ts",
+    "tests/**/*.ts",
     "jest.config.ts"
   ],
   "exclude": [

@@ -7,4 +7,6 @@ export interface IToolsService {
     findAll(): Promise<IToolListDTO>
     delete(id: number): Promise<any>
     search(valor: string): Promise<IToolListDTO>
+    validateTool(data: IToolDTO): Promise<void>
+    findByTitle(title: string): Promise<Tool>
 }

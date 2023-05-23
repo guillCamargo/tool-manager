@@ -1,5 +1,5 @@
 import { ToolsController } from "@controllers/ToolsController"
-import { ToolsRepository } from "@repositories/implamentations/ToolsRepository"
+import { ToolsRepository } from "@repositories/implementations/ToolsRepository"
 import { ToolsService } from "./ToolsService"
 
 
