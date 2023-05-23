@@ -1,9 +1,8 @@
 import { ToolsController } from "@controllers/ToolsController"
-import { ToolsRepository } from "@repositories/implementations/ToolsRepository"
+import { MySQLToolsRepository } from "@repositories/implementations/MySQLToolsRepository"
 import { ToolsService } from "./ToolsService"
 
-
-const toolsRepository = new ToolsRepository
+const toolsRepository = new MySQLToolsRepository
 
 const toolsService = new ToolsService(toolsRepository)
 

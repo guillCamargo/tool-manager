@@ -53,10 +53,28 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "auth": {
-                                            "type": "boolean"
+                                        "access_token": {
+                                            "type": "string"
                                         },
-                                        "token": {
+                                        "expires_in": {
+                                            "type": "number"
+                                        },
+                                        "refresh_expires_in": {
+                                            "type": "number"
+                                        },
+                                        "refresh_token": {
+                                            "type": "string"
+                                        },
+                                        "token_type": {
+                                            "type": "string"
+                                        },
+                                        "not-before-policy": {
+                                            "type": "number"
+                                        },
+                                        "session_state": {
+                                            "type": "string"
+                                        },
+                                        "scope": {
                                             "type": "string"
                                         }
                                     }

@@ -4,7 +4,7 @@ import { IToolDTO } from "@services/tools/dtos/ToolDTO";
 import ErrorMessage from "@utils/ErrorMessage";
 import { Op, Sequelize } from "sequelize";
 
-export class ToolsRepository implements IToolsRepository {
+export class MySQLToolsRepository implements IToolsRepository {
     async findAll(): Promise<Tool[]> {
         return Tool.findAll()
     }
