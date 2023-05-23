@@ -21,7 +21,7 @@ export default {
     "@entities/(.*)": ["<rootDir>/src/core/entities/$1"],
     "@services/(.*)": ["<rootDir>/src/core/services/$1"],
     "@utils/(.*)": ["<rootDir>/src/core/utils/$1"],
-    "@repositories/interfaces/(.*)": ["<rootDir>/src/core/repositories/interfaces*"],
+    "@repositories/interfaces/(.*)": ["<rootDir>/src/core/repositories/interfaces/$1"],
     "@controllers/(.*)": ["<rootDir>/src/infra/controllers/$1"],
     "@database/(.*)": ["<rootDir>/src/infra/database/$1"],
     "@repositories/implementations/(.*)": ["<rootDir>/src/infra/repositories/implementations/$1"],

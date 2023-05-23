@@ -15,6 +15,58 @@
         }
     ],
     "paths": {
+        "/login": {
+            "post": {
+                "summary": "Autenticação de usuário",
+                "description": "Rota responsável por obter o token de autenticação",
+                "tags": [
+                    "Users"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples": {
+                                "tool": {
+                                    "value": {
+                                        "username": "admin",
+                                        "password": "12345"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Sem autorização"
+                    },
+                    "500": {
+                        "description": "Erro inesperado no servidor."
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "auth": {
+                                            "type": "boolean"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/tools": {
             "post": {
                 "summary": "Cadastro de ferramenta",
@@ -225,6 +277,17 @@
                         "items": {
                             "type": "string"
                         }
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
                     }
                 }
             }
