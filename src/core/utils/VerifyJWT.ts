@@ -14,11 +14,12 @@ export const verifyJWT = async (req: Request, res: Response, next: () => void) =
 
     try {
         await axios.get(`http://keycloak:${process.env.KEYCLOAK_PORT}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
-            config);
-
-            next()
+            config).then(() => {
+                next()
+            }).catch((e) => {
+                throw new ErrorMessage(401, 'Token Inválido')
+            })
     } catch (e) {
-        throw new ErrorMessage(401, 'Token Inválido')
+        return res.status(e.code).send(e)
     }
-
 }

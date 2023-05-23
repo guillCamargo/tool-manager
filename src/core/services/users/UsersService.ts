@@ -1,15 +1,10 @@
 import ErrorMessage from "@utils/ErrorMessage";
 import { IUsersService } from "./IUsersService";
 import { UserCredentialsDTO } from "./dtos/UserCredentialsDTO";
-import { IUsersRepository } from "@repositories/interfaces/IUSersRepository";
 import axios from "axios";
 import querystring from "querystring"
 
-
 export class UsersService implements IUsersService {
-    constructor(
-        private usersRepository: IUsersRepository
-    ) { }
 
     async login(userCredentials: UserCredentialsDTO): Promise<string> {
         try {
