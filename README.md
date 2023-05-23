@@ -35,3 +35,4 @@ Foram realizadas as seguintes atividades:
 - [x] Testes Unitários 
 - [x] Criação dos serviços e controladores
 - [x] Implementação dos repositories
+- [x] Implementação e configuração do Keycloak 
