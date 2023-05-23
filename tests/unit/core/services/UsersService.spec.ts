@@ -1,9 +1,7 @@
 import { expect, describe, it } from '@jest/globals';
-import { UsersRepository } from '../../../../src/infra/repositories/implementations/UsersRepository'
 import { UsersService } from '../../../../src/core/services/users/UsersService'
-import User from '../../../../src/core/entities/User';
-import { IUsersRepository } from '@repositories/interfaces/IUSersRepository';
 import { IUsersService } from '@services/users/IUsersService';
+import axios from "axios";
 
 describe('UsersService', () => {
 
@@ -12,17 +10,16 @@ describe('UsersService', () => {
         password: '54321',
     }
 
-    let usersRepository: IUsersRepository
     let usersService: IUsersService
 
     beforeEach(() => {
-        usersRepository = new UsersRepository()
-        usersService = new UsersService(usersRepository)
+        usersService = new UsersService()
     })
 
     it('If it can find an User e generate a token', async () => {
-        const user = User.build(userMock)
-        jest.spyOn(User, 'findOne').mockResolvedValueOnce(user)
+        jest.spyOn(axios, 'post').mockResolvedValueOnce({
+            data: {}
+        })
 
         const token = await usersService.login(userMock)
 
@@ -30,8 +27,9 @@ describe('UsersService', () => {
     })
 
     it('If it throw an error tring to generate token', async () => {
-        const user = User.build(userMock)
-        jest.spyOn(User, 'findOne').mockRejectedValue(new Error('Erro interno.'))
+        jest.spyOn(axios, 'post').mockRejectedValueOnce({
+            data: {}
+        })
 
         await expect(usersService.login(userMock)).rejects
             .toHaveProperty('message', 'Credenciais inválidas')

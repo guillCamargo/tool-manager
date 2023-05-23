@@ -18,7 +18,7 @@ services:
       - db:/var/lib/mysql
   app:
     depends_on:
-      - dbmysql
+      - dbauthmysql
     build: .
     networks:
       - db-connection
@@ -36,6 +36,41 @@ services:
       - .:/usr/app
     stdin_open: true
     tty: true
+  dbauthmysql:
+    depends_on:
+      - dbmysql
+    image: mysql:8.0
+    networks:
+      - db-connection
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_AUTH_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_AUTH_DATABASE
+    ports:
+      - $MYSQLDB_AUTH_LOCAL_PORT:$MYSQLDB_AUTH_DOCKER_PORT
+    volumes:
+      - db:/var/lib/authmysql
+  keycloak:
+    image: quay.io/keycloak/keycloak:15.0.0
+    networks:
+      - db-connection
+    depends_on:
+      - dbauthmysql
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=$MYSQLDB_DIALECT
+      - DB_USER=root
+      - DB_PORT=$MYSQLDB_AUTH_DOCKER_PORT
+      - DB_PASSWORD=$MYSQLDB_AUTH_ROOT_PASSWORD
+      - DB_ADDR=dbauthmysql
+      - DB_DATABASE=$MYSQLDB_AUTH_DATABASE
+      - JDBC_PARAMS=connectTimeout=30000
 volumes:
   db:
 

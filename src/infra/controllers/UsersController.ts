@@ -10,7 +10,7 @@ export class UsersController {
         try {
             const token = await this.usersService.login(req.body)
 
-            return res.status(201).send({auth: true, token: token});
+            return res.status(201).send(token);
         } catch (e) {
             return res.status(e.code).send(e)
         }
