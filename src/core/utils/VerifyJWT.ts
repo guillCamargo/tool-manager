@@ -1,22 +1,24 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import axios from "axios";
+import ErrorMessage from "./ErrorMessage";
+var querystring = require('querystring');
 
-export const verifyJWT = (req: Request, res: Response, next: () => void) => {
+export const verifyJWT = async (req: Request, res: Response, next: () => void) => {
     const authorization = req.headers['authorization']
-    let token = '';
     if (!authorization)
         return res.status(401).json({ auth: false, message: 'No token provided.' });
-    else
-        token = authorization.replace('Bearer ', '');
 
-    jwt.verify(
-        token,
-        process.env.SECRET,
-        (error, decoded) => {
-            if (error) {
-                return res.status(401).json({ auth: false, message: 'Failed to authenticate token.' });
-            }
+    const config = {
+        headers: { Authorization: authorization }
+    };
+
+    try {
+        await axios.get(`http://keycloak:${process.env.KEYCLOAK_PORT}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
+            config);
 
             next()
-        });
+    } catch (e) {
+        throw new ErrorMessage(401, 'Token Inválido')
+    }
+
 }
