@@ -1,5 +1,5 @@
 # 1. tool-manager
-Gerenciador de ferramentas em NodeJS integrado ao Mysql. Usando autentição básica, retornando JWT para autorização.
+Gerenciador de ferramentas em NodeJS integrado ao Mysql. Usando autentição via keycloak.
 
 ## 1.1. Executando projeto
 Para executá-lo, basta executar o comando: 
@@ -36,3 +36,4 @@ Foram realizadas as seguintes atividades:
 - [x] Criação dos serviços e controladores
 - [x] Implementação dos repositories
 - [x] Implementação e configuração do Keycloak 
+- [ ] Separação do módulo de login com Keycloak
