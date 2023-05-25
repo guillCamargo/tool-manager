@@ -8,7 +8,7 @@ docker-compose up
 ````
 Ao executar este comando a aplicação provê 3 apps, uma delas o banco de dados em mysql, e a outra, uma aplicação de serviços para gerenciamento de ferramentase também uma instânci do Keycloack.
 Após levantar o banco de dados, realiza um db:migrate enquanto a aplicação sobe. 
-Para utilizar o keycloack, é necessário configurar suas permissões, e enviar na aplicação as credenciais de usuário na rola /login:
+Para utilizar o keycloack, é necessário configurar suas permissões, e enviar na aplicação as credenciais de usuário na rota '/login':
 ````
 {
     "username": "admin",
